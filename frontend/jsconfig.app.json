@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",  // Set the base URL to the root directory
+    "paths": {
+      "@/*": ["src/*"]  // Define the alias for "@/..." to map to "src/..."
+    }
+  },
+  "include": ["src/**/*"],  // Include all files in the src folder
+  "exclude": ["node_modules", "**/*.spec.js"]  // Exclude node_modules and any spec files
+}
