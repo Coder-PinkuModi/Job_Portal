@@ -3,9 +3,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useDispatch } from 'react-redux'
-import { setUser } from "../../store/User.AuthSlice.js";
+import { setUserStore } from "../../store/User.AuthSlice.js";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../../components/shared/Navbar";
+import Navbar from "../../components/shared/Navbar.jsx";
 import { USERAUTHENDPOINT } from "../../utils/auth.endpoints";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
@@ -61,7 +61,7 @@ const Login = () => {
             console.log("Login successful:", response);
             toast.success(`${response.data.message}`);
 
-            dispatch(setUser(response.data));
+            dispatch(setUserStore(response.data));
 
             navigate("/"); // navigate user to home page after login
 

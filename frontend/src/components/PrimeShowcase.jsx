@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import SearchBox from "./SearchBox.jsx";
 
 function PrimeShowcase() {
-    const text = "Tuurn your dream job into reality with  ";
+    const text = "Turn your dream job into reality with  ";
     const [displayedText, setDisplayedText] = useState('');
 
     useEffect(() => {

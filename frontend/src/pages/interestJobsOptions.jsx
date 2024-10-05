@@ -1,8 +1,10 @@
+import axios from "axios"
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { JOBINTERESTENDPOINTS } from "../utils/jobInterest.endpoints.js"
 
-const JobInterest = () => {
+const JobInterestSetup = () => {
     const jobs = [
         // Technology & IT
         "App Developer",
@@ -199,59 +201,91 @@ const JobInterest = () => {
 
     const [inputValue, setInputValue] = useState("");
     const [jobsInterest, setJobsInterest] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value);
-    };
+        if (jobsInterest.length > 0) {
+            try {
+                setLoading(true);
+                const response = await axios.post(
+                    `${JOBINTERESTENDPOINTS}/interestJobsSetup`,
+                    { jobsInterest }, // Only send the body here
+                    { withCredentials: true } // Send cookies with the request
+                );
 
-    const handleJobSelect = (job) => {
-        if (!jobsInterest.includes(job)) {
-            setJobsInterest((prev) => [...prev, job]);
+                console.log(response.data)
+                console.log(response.error)
+            if (response.status === 201) {
+                setSuccess(true);
+            }
+        } catch (err) {
+            setError("Failed to save your job interests. Please try again ", err);
+        } finally {
+            setLoading(false);
         }
-        setInputValue("");
-    };
-
-    const handleClearJobs = () => {
-        setJobsInterest([]);
-    };
-
-    const filteredJobs = jobs.filter((job) =>
-        job.toLowerCase().includes(inputValue.toLowerCase())
-    );
-
-    return (
-        <div className="containerInterestJobs w-screen h-[700px] p-2 overflow-hidden gap-4 flex justify-center items-center flex-col">
-            <div className="searchBoxJobsInterest">
-                <Input
-                    type="search"
-                    placeholder="Search for job domain"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    className="w-[700px] font-sans font-[500] "
-                />
-            </div>
-            <div className="selectedJobContainer">
-                <div className="selectedJobs flex flex-wrap gap-3 h-14 w-[700px] overflow-x-hidden bg-[#7171717c] rounded-lg">
-                    {jobsInterest.map((job, index) => (
-                        <p key={index} className="bg-[#f0eded] px-2 py-2rounded-lg inline-block m-1 cursor-pointer rounded-lg ">
-                            {job}
-                        </p>
-                    ))}
-                </div>
-            </div>
-            <div className="jobShowContainer flex flex-wrap gap-3 h-[600px] w-[700px] overflow-x-auto bg-[#ffffffe1]">
-                {filteredJobs.map((job, index) => (
-                    <div key={index} className="inline-block m-1 cursor-pointer " onClick={() => handleJobSelect(job)}>
-                        <p className="bg-[#f0eded] px-3 py-1 rounded-lg">{job}</p>
-                    </div>
-                ))}
-            </div>
-            <div className="controlling flex gap-4">
-                <Button className="">Save</Button>
-                <Button onClick={handleClearJobs}>Clear</Button> {/* Clear button */}
-            </div>
-        </div>
-    );
+    }
 };
 
-export default JobInterest;
+const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+};
+
+const handleJobSelect = (job) => {
+    if (!jobsInterest.includes(job)) {
+        setJobsInterest((prev) => [...prev, job]);
+    }
+    setInputValue("");
+};
+
+const handleClearJobs = () => {
+    setJobsInterest([]);
+};
+
+const filteredJobs = jobs.filter((job) =>
+    job.toLowerCase().includes(inputValue.toLowerCase())
+);
+
+
+return (
+    <div className="containerInterestJobs w-screen h-[700px] p-2 overflow-hidden gap-4 flex justify-center items-center flex-col">
+        <div className="searchBoxJobsInterest">
+            <Input
+                type="search"
+                placeholder="Search for job domain"
+                value={inputValue}
+                onChange={handleInputChange}
+                className="w-[700px] font-sans font-[500]"
+            />
+        </div>
+        <div className="selectedJobContainer">
+            <div className="selectedJobs flex flex-wrap gap-3 h-14 w-[700px] overflow-x-hidden bg-[#7171717c] rounded-lg">
+                {jobsInterest.map((job, index) => (
+                    <p key={index} className="bg-[#f0eded] px-2 py-2 rounded-lg inline-block m-1 cursor-pointer">
+                        {job}
+                    </p>
+                ))}
+            </div>
+        </div>
+        <div className="jobShowContainer flex flex-wrap gap-3 h-[600px] w-[700px] overflow-x-auto bg-[#ffffffe1]">
+            {filteredJobs.map((job, index) => (
+                <div key={index} className="inline-block m-1 cursor-pointer" onClick={() => handleJobSelect(job)}>
+                    <p className="bg-[#f0eded] px-3 py-1 rounded-lg">{job}</p>
+                </div>
+            ))}
+        </div>
+        <div className="controlling flex gap-4">
+            <Button className="bg-[#49b552]" onClick={handleSubmit} disabled={loading}>
+                {loading ? "Saving..." : "Save"}
+            </Button>
+            <Button onClick={handleClearJobs}>Clear</Button>
+        </div>
+        {error && <p className="text-red-500">{error}</p>}
+        {success && <p className="text-green-500">Job interests saved successfully!</p>}
+    </div>
+);
+};
+
+export default JobInterestSetup;

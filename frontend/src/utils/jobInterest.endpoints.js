@@ -1,0 +1,1 @@
+export const JOBINTERESTENDPOINTS = "http://localhost:3000/api/jobInterest"
