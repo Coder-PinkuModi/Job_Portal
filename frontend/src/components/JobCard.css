@@ -1,0 +1,110 @@
+/* Common animation properties for all job cards */
+.animate {
+    animation-duration: 0.75s;
+    animation-timing-function: cubic-bezier(0.26, 0.53, 0.74, 1.48);
+    animation-fill-mode: backwards;
+    opacity: 0;
+}
+
+@keyframes slide-in-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(50px); /* Start from below */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End at the original position */
+    }
+}
+
+/* Apply slide-in animation */
+.animate.glow {
+    animation-name: slide-in-bottom;
+    animation-timing-function: ease;
+}
+
+/* Apply the animation to the job cards */
+.job-card {
+    width: 17vw; /* Adjust as necessary */
+    min-width: 200px;
+    background-color: #e9e4e406;
+    border: 1px solid #d3d1d1;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 16px;
+    margin: 16px;
+    opacity: 0; /* Start with opacity 0 */
+    animation: slide-in-bottom 0.75s ease forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px); /* Blur effect */
+}
+
+/* Hover effect: Pop out and move up */
+.job-card:hover {
+    background-color: #fffffffd;
+    transform: translateY(-10px);
+    box-shadow: 10px 8px 15px rgba(0.9, 0.9, 0.9, 0.4); /* Enhanced shadow for lift effect */
+}
+
+/* Image styling */
+.job-card .image {
+    display: flex;
+    align-items: flex-start;
+    width: 50px;
+    max-width: max-content;
+    height: 50px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.job-card .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Details section */
+.job-card .details {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+}
+
+/* Title and company section */
+.job-card .title h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #333333;
+    margin: 0;
+}
+
+.job-card .title p {
+    font-size: 0.9em;
+    color: #888888;
+    margin: 4px 0;
+}
+
+/* Salary and location */
+.job-card .salary,
+.job-card .location,
+.job-card .experience {
+    font-size: 0.9em;
+    color: #777777;
+    margin-top: 4px;
+}
+
+.job-card .salary {
+    font-weight: 500;
+    color: #3B82F6;
+}
+
+.job-card .location {
+    color: #e24365fb;
+}
+
+.job-card .experience {
+    color: #34D399;
+    margin-bottom: 0;
+}
+

@@ -9,7 +9,7 @@ function Home() {
     <div>
       <Navbar />
       <PrimeShowcase />
-      <InterestedJobs />
+      <InterestedJobs>hi</InterestedJobs>
       {/* <Footer /> */}
     </div>
   );
