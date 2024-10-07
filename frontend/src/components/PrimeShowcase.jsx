@@ -2,26 +2,27 @@ import { useState, useEffect } from 'react';
 import SearchBox from "./SearchBox.jsx";
 
 function PrimeShowcase() {
-    const text = "Turn your dream job into reality with  ";
+    const text = "Turn your dream job into reality with ";
     const [displayedText, setDisplayedText] = useState('');
 
     useEffect(() => {
         let index = 0;
+        let currentText = "";  // Local variable for building the text
+
         const typeWriterEffect = () => {
             if (index < text.length) {
-                setDisplayedText(prev => prev + text[index]);
+                currentText += text.charAt(index);
+                setDisplayedText(currentText);
                 index++;
-                const timer = setTimeout(typeWriterEffect, 50); 
-
-                return () => clearTimeout(timer);
+                setTimeout(typeWriterEffect, 50);
             }
         };
-        
-        const timerId= setTimeout(typeWriterEffect(),1500) 
 
-        return () => clearTimeout(timerId);
+        const initialDelay = setTimeout(typeWriterEffect, 1500);
 
-    }, []);
+        return () => clearTimeout(initialDelay);
+
+    }, [text]);
 
     return (
         <div className="primeContainer flex flex-col gap-3 my-3 bg-[#f0ebebef] py-4 shadow-lg rounded-lg">
@@ -30,7 +31,7 @@ function PrimeShowcase() {
             </div>
             <div className='flex items-center justify-center px-6 py-3 text-4xl font-sans rounded-xl'>
                 <p className='font-bold text-3xl'>
-                    {displayedText.split('  ')[0]}
+                    {displayedText}
                     <span className="font-bold"> Job<span className='text-[#3B82F6]'>Portal</span></span>
                 </p>
             </div>
