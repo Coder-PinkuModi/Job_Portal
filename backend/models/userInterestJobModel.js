@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const userInterestJobSchema = new mongoose.Schema({
-    job:[{
+    jobsInterested:[{
         type: String,
     }],
     user:{

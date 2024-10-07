@@ -1,6 +1,9 @@
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import { userModel } from "../models/userModel.js";
 import { jwtTokenSign } from "../utils/jwtTokenAuth.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 async function register(req, res) {
   try {
@@ -26,13 +29,11 @@ async function register(req, res) {
       role,
     });
 
-    return res
-      .status(201)
-      .json({
-        message: "User registered successfully",
-        success: true,
-        user: newUser,
-      });
+    return res.status(201).json({
+      message: "User registered successfully",
+      success: true,
+      user: newUser,
+    });
   } catch (error) {
     console.error("Error during registration:", error);
     return res
@@ -64,30 +65,70 @@ async function login(req, res) {
     const token = await jwtTokenSign({ _id: user._id, role: user.role });
 
     res.cookie("auth_token", token, {
-      // domain: "localhost",
-      httpOnly: true,
+      domain: "localhost",
+      // httpOnly: true,
       // sameSite: "None",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    return res
-      .status(200)
-      .json({ message: `Welcome ${user.fullName}`, success: true,
-        userId: user._id,
-        userName: user.fullName,
-        // userEmail: user.email,
-        role: user.role,
-      });
+    return res.status(200).json({
+      message: `Welcome ${user.fullName}`,
+      success: true,
+      userId: user._id,
+      userName: user.fullName,
+      // userEmail: user.email,
+      role: user.role,
+    });
     //   .header(`Authorization Bearer ${token}`)
   } catch (error) {
     console.log("error while login", error);
   }
 }
 
+async function userProfile(req, res) {
+  try {
+    const auth_token = req.cookies?.auth_token;
+    if (!auth_token) {
+      return res.status(400).json({
+        message: "Unauthorized access, token not found",
+        success: false,
+      });
+    }
+
+    const decoded = jwt.verify(auth_token, process.env.JWT_SECRETFORAUTH);
+
+    if (!decoded) {
+      return res.status(400).json({
+        message: "Unauthorized access, decode not done",
+        success: false,
+      });
+    }
+
+    const user = await userModel.findOne({ _id: decoded._id });
+
+    if (!user) {
+      return res.status(400).json({
+        message: "Unauthorized access, user not found",
+        success: false,
+      });
+    }
+
+    return res.status(200).json({
+      message: "User profile",
+      success: true,
+      userId: user._id,
+      userName: user.fullName,
+      // userEmail: user.email,
+      role: user.role,
+    });
+  } catch (error) {
+    console.log("error while getting user profile", error);
+  }
+}
+
 function logout(req, res) {
   try {
     res.clearCookie("auth_token", {
-      httpOnly: true,
       sameSite: "strict",
     });
     return res
@@ -98,4 +139,4 @@ function logout(req, res) {
   }
 }
 
-export { register, login, logout };
+export { register, login, userProfile, logout };
