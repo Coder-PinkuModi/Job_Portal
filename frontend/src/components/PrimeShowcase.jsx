@@ -7,7 +7,7 @@ function PrimeShowcase() {
 
     useEffect(() => {
         let index = 0;
-        let currentText = "";  // Local variable for building the text
+        let currentText = ""; 
 
         const typeWriterEffect = () => {
             if (index < text.length) {

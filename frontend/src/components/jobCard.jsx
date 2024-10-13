@@ -1,4 +1,3 @@
-import React from 'react';
 import './JobCard.css';
 import appleLogo from '../assets/images/apple-logo.png';
 
@@ -20,8 +19,3 @@ function JobCard({ title, companyName, salary, location, experience, className, 
 }
 
 export default JobCard;
-
-
-
-
-

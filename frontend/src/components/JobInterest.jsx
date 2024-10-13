@@ -13,13 +13,12 @@ export const InterestedJobs = () => {
     ];
 
     return (
-        <div className="jobsContainer min-h-min flex flex-col justify-center  bg-white bg-opacity-10 backdrop-blur-sm rounded-lg shadow-lg">
-            <div className="flex justify-between mt-5 px-6 items-center">
-                <h1 className="text-lg font-sans font-medium">Jobs related to you</h1>
+        <div className="jobsContainer min-h-min flex flex-col justify-center  bg-white bg-opacity-10 backdrop-blur-sm rounded-lg shadow-lg mt-4 pb-4">
+            <div className="flex justify-between mt-6 px-6 items-center">
+                <h1 className="text-xl font-sans font-medium">Jobs related to you</h1>
             </div>
 
-            {/* Apply the transparent-blur class to the job cards container */}
-            <div className="flex gap-3 mx-2 transparent-blur h-80 rounded-md relative w-full overflow-auto">
+            <div className="flex gap-3 mx-1 transparent-blur h-80 rounded-md relative w-full overflow-auto">
                 <div
                     className="text-sm text-[#5892ee] hover:text-[#e5695c] hover:underline cursor-pointer inline-block font-semibold mt-2 absolute right-4"
                     style={{ zIndex: 10 }} // Inline style to set z-index

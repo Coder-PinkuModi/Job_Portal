@@ -14,16 +14,16 @@ import { setUserStore } from "../../store/User.AuthSlice.js";
 
 const Navbar = () => {
     const [user, setUser] = useState(null);
-    const userFromStore = useSelector((state) => state.userAuth); 
+    const userFromStore = useSelector((state) => state.userAuth);
     console.log("userFromStore", userFromStore);
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
 
     useEffect(() => {
         // Function to check for cookies (e.g., auth_token) and fetch user data
         const fetchUserProfile = async () => {
-            
+
             const cookies = document.cookie.split(";");
-            
+
             const authTokenCookie = cookies.find((cookie) =>
                 cookie.trim().startsWith("auth_token=")
             );
@@ -38,12 +38,12 @@ const Navbar = () => {
                         if (response.status === 200) {
                             const userData = response.data;
                             console.log("User profile fetched successfully:", userData);
-                            
+
                             setUser(userData);
 
                             // Dispatch the user data to the Redux store
                             dispatch(setUserStore(response.data));
-                            
+
                         }
                     } else {
                         setUser(userFromStore);
@@ -54,7 +54,7 @@ const Navbar = () => {
             }
         };
 
-        fetchUserProfile(); 
+        fetchUserProfile();
     }, [dispatch, userFromStore]);
 
     return (
@@ -70,8 +70,8 @@ const Navbar = () => {
                         <li className="cursor-pointer">
                             <Link to="/">Home</Link>
                         </li>
-                        <li className="cursor-pointer">Jobs</li>
-                        <li className="cursor-pointer">Browse</li>
+                        <li className="cursor-pointer"><Link to="/jobs">Jobs</Link></li>
+                        <li className="cursor-pointer"><Link to="/browse">Browse</Link></li>
                     </ul>
                 </div>
 
@@ -89,12 +89,12 @@ const Navbar = () => {
                 ) : (
                     <Popover>
                         <PopoverTrigger>
-                            <Avatar>
+                            <Avatar className="cursor-pointer">
                                 <AvatarImage src="https://github.com/shadcn.png" />
                             </Avatar>
                         </PopoverTrigger>
                         <PopoverContent>
-                            {user.name} <br />
+                           <Link to='/profile' className="hover:underline"> {user.name} <br /></Link>
                             <Button variant="link">Logout</Button>
                         </PopoverContent>
                     </Popover>

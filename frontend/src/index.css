@@ -75,3 +75,28 @@ body{
     @apply bg-background text-foreground;
   }
 }
+
+
+
+/* Default icon color */
+.icon {
+  color: #fff; /* White by default */
+  transition: color 0.3s ease; /* Smooth transition */
+}
+
+/* Hover effects for each icon */
+.social-link:hover .fa-envelope {
+  color: #D44638; /* Gmail red */
+}
+
+.social-link:hover .fa-linkedin {
+  color: #0A66C2; /* LinkedIn blue */
+}
+
+.social-link:hover .fa-github {
+  color: #333; /* GitHub black */
+}
+
+.social-link:hover .fa-instagram {
+  color: #C13584; /* Instagram gradient color */
+}
