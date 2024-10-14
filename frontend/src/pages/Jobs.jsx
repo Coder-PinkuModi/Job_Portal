@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import Navbar from "../components/shared/Navbar.jsx";
 import Footer from "../components/shared/Footer.jsx";
-import JobCard from "../components/JobCard.jsx"
+import JobCard from "@components/JobCard.jsx"
 
 function Jobs() {
   const jobs = [
