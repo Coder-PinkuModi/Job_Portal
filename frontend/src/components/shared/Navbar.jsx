@@ -1,25 +1,24 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { USERAUTHENDPOINT } from "../../utils/auth.endpoints.js";
+import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { USERAUTHENDPOINT } from "../../utils/auth.endpoints.js"
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import axios from "axios";
-import { setUserStore } from "../../store/User.AuthSlice.js";
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import axios from "axios"
+import { setUserStore } from "../../store/User.AuthSlice.js"
 
 const Navbar = () => {
     const [user, setUser] = useState(null);
     const userFromStore = useSelector((state) => state.userAuth);
-    console.log("userFromStore", userFromStore);
-    const dispatch = useDispatch();
+    console.log("userFromStore", userFromStore)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        // Function to check for cookies (e.g., auth_token) and fetch user data
         const fetchUserProfile = async () => {
 
             const cookies = document.cookie.split(";");
@@ -41,7 +40,6 @@ const Navbar = () => {
 
                             setUser(userData);
 
-                            // Dispatch the user data to the Redux store
                             dispatch(setUserStore(response.data));
 
                         }
@@ -71,7 +69,7 @@ const Navbar = () => {
                             <Link to="/">Home</Link>
                         </li>
                         <li className="cursor-pointer"><Link to="/jobs">Jobs</Link></li>
-                        <li className="cursor-pointer"><Link to="/browse">Browse</Link></li>
+                        {/* <li className="cursor-pointer"><Link to="/browse">Browse</Link></li> */}
                     </ul>
                 </div>
 
@@ -101,7 +99,7 @@ const Navbar = () => {
                 )}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Navbar;
+export default Navbar
