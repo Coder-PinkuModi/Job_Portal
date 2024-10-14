@@ -1,6 +1,6 @@
 import Navbar from "../components/shared/Navbar";
 import appleLogo from "../assets/images/apple-logo.png";
-import JobCard from "../components/Jobcard.jsx";
+import JobCard from "@components/Jobcard.jsx";
 import Footer from "../components/shared/Footer.jsx";
 
 const userProfile = {
