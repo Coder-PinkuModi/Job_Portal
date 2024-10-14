@@ -1,6 +1,6 @@
 // import { Badge } from "@/components/ui/badge";
 // import { JOBSENDPOINT } from "../utils/jobs.enpoints.js";
-import JobCard from "./JobCard";
+import JobCard from "./Jobcard.jsx";
 
 export const InterestedJobs = () => {
     const jobs = [
