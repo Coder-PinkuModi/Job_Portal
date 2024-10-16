@@ -4,7 +4,7 @@ import SearchBox from "./SearchBox.jsx";
 function PrimeShowcase() {
     const text = "Turn your dream job into reality with ";
     const [displayedText, setDisplayedText] = useState('');
-
+    
     useEffect(() => {
         let index = 0;
         let currentText = ""; 

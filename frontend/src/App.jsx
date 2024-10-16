@@ -13,7 +13,6 @@ import Profile from "./pages/Profile.jsx"
 export default function App() {
   return (
     <div>
-      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
