@@ -8,7 +8,8 @@ dotenv.config();
 async function register(req, res) {
   try {
     const { fullName, email, phoneNumber, password, role } = req.body;
-    // console.log(req)
+    console.log("req.file",req.file);
+    
     if (!fullName || !email || !phoneNumber || !password || !role) {
       return res
         .status(400)

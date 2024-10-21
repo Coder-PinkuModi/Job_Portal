@@ -19,7 +19,7 @@ const SignUp = () => {
         role: "",
         password: "",
         confirmPassword: "",
-        // profile: ""
+        profile: ""
     })
 
     const handleChangeForm = (event) => {
@@ -37,12 +37,12 @@ const SignUp = () => {
         })
     }
 
-    // const handleProfileChange = (event) => {
-    //     setForm({
-    //         ...form,
-    //         profile: event.target.files[0]
-    //     })
-    // }
+    const handleProfileChange = (event) => {
+        setForm({
+            ...form,
+            profile: event.target.files[0]
+        })
+    }
     const handleSubmitChange = async (event) => {
         event.preventDefault();
         setSubmitting(true);
@@ -54,12 +54,12 @@ const SignUp = () => {
         formData.append("role", form.role);
         formData.append("password", form.password);
         formData.append("confirmPassword", form.confirmPassword);
-        // formData.append("profile", form.profile);
+        formData.append("profile", form.profile);
 
         try {
             const response = await axios.post(`${USERAUTHENDPOINT}/register`, formData, {
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "multipart/form-data",
                 },
             });
 
@@ -124,10 +124,10 @@ const SignUp = () => {
                         <Label htmlFor="confirmPassword" className="relative top-2">Confirm password</Label>
                         <Input type="password" id="confirmPassword" placeholder="Confirm your password" name="confirmPassword" onChange={handleChangeForm} required />
 
-                        {/* <div className="flex gap-5 items-center relative top-3">
+                        <div className="flex gap-5 items-center relative top-3">
                             <Label htmlFor="profile">Profile Image</Label>
-                            <Input type="file" id="profile" name="profile" accept="image/*" className="p-2 w-1/3 bg-[#d6d3d3f7] cursor-pointer" onChange={handleProfileChange} />
-                        </div>  */}
+                            <Input type="file" id="profile" name="profile" accept="image/*" className="p-2 w-1/3 bg-[#d6d3d3f7] cursor-pointer"onChange={handleProfileChange} required />
+                        </div> 
 
                         {!submitting ? (
                             <Button type="submit" className="relative top-6 bg-[#4150d9e3] hover:bg-[#515dc8]" onClick={(event) => handleSubmitChange(event)}>Sign Up</Button>
