@@ -2,24 +2,41 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { userModel } from "../models/userModel.js";
 import { jwtTokenSign } from "../utils/jwtTokenAuth.js";
+import cloudinaryUploader from "../utils/coudinary.js";
 import dotenv from "dotenv";
 dotenv.config();
 
 async function register(req, res) {
   try {
     const { fullName, email, phoneNumber, password, role } = req.body;
-    console.log("req.file",req.file);
-    
     if (!fullName || !email || !phoneNumber || !password || !role) {
       return res
         .status(400)
         .json({ message: "All fields are required", success: false });
     }
+
+    const file = req.file;
+    // console.log("file while register",file)
+
+    if (!file) {
+      return res
+        .status(400)
+        .json({ message: "Profile picture is required", success: false });
+    }
+
     const user = await userModel.findOne({ email: email });
     if (user)
       return res
         .status(400)
         .json({ message: "User already exists", success: false });
+
+    const secureUrlToFile = await cloudinaryUploader(file.filename);
+
+    if (!secureUrlToFile) {
+      return res
+        .status(400)
+        .json({ message: "Profile picture upload failed", success: false });
+    }
 
     const hashPassword = await bcrypt.hash(password, 10);
     const newUser = await userModel.create({
@@ -28,6 +45,7 @@ async function register(req, res) {
       phoneNumber,
       password: hashPassword,
       role,
+      profile: { profilePhoto: secureUrlToFile }
     });
 
     return res.status(201).json({

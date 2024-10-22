@@ -2,6 +2,8 @@ import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import dbConnect from "./config/db.js"
+import { fileURLToPath } from 'url'
+import path from "path"
 
 import userAuth from "./routes/userAuth.js"
 import companyRoute from "./routes/companyRoute.js"
@@ -28,6 +30,8 @@ app.use(cors(corsOptions));
 
 dbConnect()
 
+const __filename= fileURLToPath(import.meta.url);
+export const __dirnameRootDirectory= path.dirname(__filename);
 
 app.use("/api/userAuth", userAuth)
 app.use("/api/company", companyRoute)
