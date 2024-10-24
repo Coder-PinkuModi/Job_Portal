@@ -56,7 +56,7 @@ const Navbar = () => {
     }, [dispatch, userFromStore]);
 
     return (
-        <div className="flex justify-between items-center mx-auto h-16 px-20">
+        <div className="flex justify-between items-center mx-auto h-16 px-20 ">
             <div>
                 <h1 className="text-3xl font-bold cursor-pointer">
                     Job<span className="text-[#3B82F6]">Portal</span>

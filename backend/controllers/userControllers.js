@@ -145,7 +145,7 @@ async function userProfile(req, res) {
   }
 }
 
-function logout(req, res) {
+async function logout(req, res) {
   try {
     res.clearCookie("auth_token", {
       sameSite: "strict",
