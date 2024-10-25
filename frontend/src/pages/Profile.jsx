@@ -1,7 +1,10 @@
+import React, { useState } from "react";
 import Navbar from "../components/shared/Navbar";
-import appleLogo from "../assets/images/apple-logo.png";
-import JobCard from "../components/JobCard.jsx"
-import Footer from "../components/shared/Footer.jsx";
+import Footer from "../components/shared/Footer";
+import JobCarousel from "../components/JobCarousel";
+import profileLogo from "../assets/images/blank-profile.jpg";
+import EditIcon from "../assets/images/edit.png";
+import "./profile.css";
 
 const userProfile = {
   name: "Pinku Modi",
@@ -9,13 +12,27 @@ const userProfile = {
   bio: "Enthusiastic developer with a passion for creating web applications using modern frameworks and cloud technologies.",
   location: "Noida",
   skills: ["Html", "Css", "Javascript", "Frontend", "Backend", "MERN Stack", "Web Design", "AWS", "Redis"],
-  education: {
-    level: "Higher Secondary",
-    institute: "Institute of Tech",
-    grade: "A",
-    cgpa: 9.0,
-  },
-  profileImage: appleLogo, 
+  education: [
+    {
+      level: "Higher Secondary",
+      institute: "Institute of Tech",
+      grade: "A",
+      cgpa: 9.0,
+    },
+    {
+      level: "Bachelor's Degree",
+      institute: "University of Science",
+      grade: "B+",
+      cgpa: 8.5,
+    },
+    {
+      level: "Master's Degree",
+      institute: "Tech University",
+      grade: "A-",
+      cgpa: 9.2,
+    },
+  ],
+  profileImage: profileLogo,
 };
 
 function Profile() {
@@ -23,70 +40,133 @@ function Profile() {
     { title: "Software Engineer", companyName: "Tech Company", salary: "$80,000 - $100,000", location: "Remote", experience: "3+ years" },
     { title: "Data Analyst", companyName: "Data Company", salary: "$70,000 - $90,000", location: "New York, NY", experience: "2+ years" },
     { title: "Web Developer", companyName: "Web Solutions", salary: "$60,000 - $80,000", location: "San Francisco, CA", experience: "1+ years" },
+    { title: "Frontend Developer", companyName: "Creative Co", salary: "$75,000 - $95,000", location: "Austin, TX", experience: "4+ years" },
+    { title: "Backend Developer", companyName: "Tech Hub", salary: "$85,000 - $105,000", location: "Los Angeles, CA", experience: "5+ years" }
   ];
 
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isEditOptionsOpen, setEditOptionsOpen] = useState(false);
+  const [showMoreEducation, setShowMoreEducation] = useState(false); // State for show more functionality
+  const [editMode, setEditMode] = useState(false); // State for edit mode
+
+  const handleImageClick = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const toggleEditOptions = () => {
+    setEditOptionsOpen((prev) => !prev);
+  };
+
+  const toggleShowMoreEducation = () => {
+    setShowMoreEducation((prev) => !prev);
+    if (showMoreEducation) setEditMode(false); // Reset edit mode when collapsing
+  };
+
+  const handleEditEducation = () => {
+    setEditMode(true);
+    // Implement the logic to edit education details here
+    alert("Edit Education Clicked"); // Placeholder for edit logic
+  };
+
   return (
-    <div className="profilePageContainer min-h-screen"> 
+    <div className="profile-page-container">
       <Navbar />
 
-      <div className="profileContainer mx-auto my-4 border border-gray-200 max-w-4xl bg-white shadow-lg rounded-lg p-8"> 
-        <div className="flex gap-6 items-center mb-6"> 
-          <div className="imageLogo">
-            <img
-              src={userProfile.profileImage} 
-              alt="profile pic"
-              className="h-20 w-20 rounded-full object-cover" 
-              /> 
-          </div>
-          <div className="profileNameTitle">
-            <h3 className="userName text-2xl font-semibold">{userProfile.name}</h3>
-            <p className="userTitle text-gray-500">{userProfile.title}</p>
+      <div className="profile-container">
+        <div className="profile-header">
+          <img
+            src={userProfile.profileImage}
+            alt="profile pic"
+            className="profile-image"
+            onClick={handleImageClick} // Open modal on click
+          />
+          <div className="profile-info">
+            <h3>
+              {userProfile.name} 
+              <abbr title="Click to Edit Profile" onClick={toggleEditOptions}>
+                <img className="EditIcon" src={EditIcon} alt="EditIcon" />
+              </abbr>
+              {isEditOptionsOpen && (
+                <div className="edit-options-modal">
+                  <button onClick={() => alert("Edit Image Clicked")}>Edit Image</button>
+                  <button onClick={() => alert("Remove Image Clicked")}>Remove Image</button>
+                  <button onClick={() => alert("Edit Name Clicked")}>Edit Name</button>
+                  <button onClick={() => alert("Edit Bio Clicked")}>Edit Bio</button>
+                </div>
+              )}
+            </h3>
+            <p>{userProfile.title}</p>
           </div>
         </div>
 
-        <div className="bio mb-6">
-          <p className="text-gray-700 leading-relaxed">{userProfile.bio}</p> 
+        <div className="bio">
+          <p>{userProfile.bio}</p>
         </div>
 
-        <div className="skills mb-6">
-          <h4 className="font-semibold text-lg mb-2">Skills</h4> 
-          <ul className="flex flex-wrap gap-2">
+        <div className="skills">
+          <h4>Skills</h4>
+          <ul>
             {userProfile.skills.map((skill, index) => (
-              <li key={index} className="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm">
-                {skill}
-              </li>
-            ))} 
+              <li key={index}>{skill}</li>
+            ))}
           </ul>
         </div>
 
-        <div className="education-details mb-6">
-          <h4 className="font-semibold text-lg mb-2">Education</h4>
-          <p className="text-gray-600">{userProfile.education.level} - {userProfile.education.institute}</p>
-          <p className="text-gray-600">Grade: {userProfile.education.grade}</p>
-          <p className="text-gray-600">CGPA: {userProfile.education.cgpa}</p>
+        <div className="education-details">
+          <h4>Education</h4>
+          {userProfile.education.slice(0, 1).map((edu, index) => (
+            <div key={index}>
+              <p>{edu.level} - {edu.institute}</p>
+              <p>Grade: {edu.grade}</p>
+              <p>CGPA: {edu.cgpa}</p>
+            </div>
+          ))}
+          {!showMoreEducation && (
+            <button onClick={toggleShowMoreEducation} className="show-more-button">Show More</button>
+          )}
+          {showMoreEducation && (
+            <>
+              {userProfile.education.slice(1).map((edu, index) => (
+                <div key={index + 1}>
+                  <p>{edu.level} - {edu.institute}</p>
+                  <p>Grade: {edu.grade}</p>
+                  <p>CGPA: {edu.cgpa}</p>
+                </div>
+              ))}
+              <button onClick={handleEditEducation} className="edit-button"><p>Update Education </p>  <img className="EditEducationIcon" src={EditIcon} alt="EditIcon" /></button>
+              <button onClick={toggleShowMoreEducation} className="show-more-button">Show Less</button>
+            </>
+          )}
         </div>
 
-        <div className="applications mb-6">
-          <h4 className="font-semibold text-lg mb-2">Job Applications</h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {jobs.map((job, index) => (
-              <JobCard
-                key={index}
-                title={job.title}
-                className='bg-white shadow-md rounded-lg p-4 hover:bg-gray-50 transition'
-                companyName={job.companyName}
-                salary={job.salary}
-                location={job.location}
-                experience={job.experience}
-              />
-            ))}
-          </div>
+        <div className="applications">
+          <h4>Job Applications</h4>
+          <JobCarousel jobs={jobs} />
         </div>
 
         <div className="location">
-          <p className="text-gray-500 italic">Location: {userProfile.location}</p>
+          <p>Location: {userProfile.location}</p>
         </div>
       </div>
+
+      {/* Modal for enlarged image */}
+      {isModalOpen && (
+        <>
+          <div className="modal" onClick={closeModal}>
+            <img src={userProfile.profileImage} alt="Enlarged profile" className="modal-image" />
+            <abbr title="Close">
+              <div className="close">
+                <p>+</p>
+              </div>
+            </abbr>
+          </div>
+        </>
+      )}
+
       <Footer />
     </div>
   );
