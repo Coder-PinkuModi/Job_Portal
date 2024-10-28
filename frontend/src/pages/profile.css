@@ -1,0 +1,287 @@
+.profile-page-container {
+  min-height: 100vh;
+}
+
+.profile-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.profile-image {
+  width: 5em;
+  height: auto;
+  border-radius: 50%;
+  object-fit: contain;
+  background-color: #f2f0f0;
+  border: 2px solid grey;
+}
+
+
+.profile-info h3 {
+  width: 7.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24px;
+  margin: 0;
+}
+
+.EditIcon {
+  width: auto;
+  height: 1.5em;
+  object-fit: contain;
+  border-radius: 100px;
+}
+
+.EditIcon:hover {
+  background-color: #f2f0f0;
+}
+
+.show-more-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: #0056b3;
+  border: none;
+  border-radius: 4px;
+}
+
+.show-more-button:hover {
+  background-color: #fff;
+  color: #07c6f6;
+}
+
+.edit-button {
+  width: fit-content;
+  display: flex;
+  margin-top: 10px;
+  margin-left: 2em;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #5c568b; /* Green */
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+.EditEducationIcon{
+  height: 1.5em;
+}
+.edit-button:hover {
+  background-color: #2796e6; /* Darker green */
+}
+
+
+.bio {
+  margin-bottom: 16px;
+}
+
+.skills h4,
+.education-details h4,
+.applications h4 {
+  font-size: large;
+  font-weight: 500;
+  padding: 10px 10px;
+}
+
+.skills ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skills li {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  padding: 5px 20px;
+  border-radius: 9999px;
+}
+
+.bio p,
+.education-details p {
+  padding-left: 20px;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  margin: 20px auto;
+  overflow: hidden;
+}
+
+.job-container {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 20px;
+}
+
+.job-container>* {
+  flex: 0 0 calc(100% / 3 - 20px);
+  /* Display 3 cards at a time */
+}
+
+.job-card {
+  background-color: #f3f4f6;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.job-card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.job-card p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+button {
+  background-color: white;
+  border: 2px solid #000;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f0f0f0;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  /* Ensure modal is above other content */
+}
+
+.close {
+  font-size: 100px;
+  position: absolute;
+  right: 5vw;
+  top: 1vh;
+  transform: rotate(45deg);
+  /* Rotate the + to look like a cross */
+  color: white;
+  /* Color of the close button */
+  cursor: pointer;
+  /* Change cursor to pointer */
+}
+
+.modal-image {
+  max-width: 70%;
+  max-height: 70%;
+}
+
+.edit-options-modal {
+  position: absolute;
+  /* Ensure it doesn't affect other components */
+  top: calc(20% + 10px);
+  /* Position it below the edit icon */
+  right: calc(50%);
+  /* Adjust as necessary */
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  /* Ensure it appears above other content */
+  border-radius: 4px;
+}
+
+.edit-options-modal button {
+  display: block;
+  padding: 10px 15px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 100%;
+  /* Full width of the modal */
+  font-size: medium;
+  text-align: left;
+  /* Align text to the left */
+}
+
+.edit-options-modal button:hover {
+  background-color: #f2f2f2;
+  /* Highlight on hover */
+}
+
+@media (max-width: 470px) {
+  .profile-container {
+    padding: 20px;
+  }
+
+  .profile-header {
+    gap: 8px;
+    /* Reduce spacing between elements */
+  }
+
+  .profile-image {
+    width: 3.5em;
+    /* Smaller profile image for very small screens */
+  }
+
+  .profile-info h3 {
+    font-size: 1.1em;
+    /* Slightly smaller font size */
+  }
+
+  .EditIcon {
+    height: 1.5em;
+    /* Adjust icon to match smaller font */
+  }
+
+  /* Adjust skill list, bio, and education if needed */
+  .skills ul {
+    gap: 6px;
+    /* Tighter skill list spacing */
+  }
+
+  .skills li {
+    font-size: 0.9em;
+    /* Smaller font for skills */
+  }
+
+  .bio,
+  .education-details,
+  .location {
+    font-size: 0.9em;
+    /* Adjust general font size for content */
+  }
+
+  .edit-options-modal button {
+    font-size: small;
+  }
+
+  .edit-options-modal {
+    top: calc(1%);
+    right: calc(1%);
+  }
+
+}
