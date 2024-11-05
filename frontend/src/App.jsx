@@ -9,7 +9,7 @@ import JobInterestSetup from "./pages/interestJobsOptions.jsx"
 import Jobs from "./pages/Jobs.jsx"
 import Browse from "./pages/Browse.jsx"
 import Profile from "./pages/Profile.jsx"
-import JobDescription from "./pages/jobDescription.jsx"
+import JobDescription from "./pages/JobDescription.jsx"
 
 export default function App() {
   return (
