@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux"
 import Navbar from "../components/shared/Navbar";
 import Footer from "../components/shared/Footer";
 import JobCarousel from "../components/JobCarousel";
@@ -36,6 +37,9 @@ const userProfile = {
 };
 
 function Profile() {
+
+  const userFromStore = useSelector((state) => state.userAuth); // this store will contain the data of the user
+
   const jobs = [
     { title: "Software Engineer", companyName: "Tech Company", salary: "$80,000 - $100,000", location: "Remote", experience: "3+ years" },
     { title: "Data Analyst", companyName: "Data Company", salary: "$70,000 - $90,000", location: "New York, NY", experience: "2+ years" },
@@ -153,7 +157,6 @@ function Profile() {
         </div>
       </div>
 
-      {/* Modal for enlarged image */}
       {isModalOpen && (
         <>
           <div className="modal" onClick={closeModal}>

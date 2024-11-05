@@ -9,6 +9,7 @@ import JobInterestSetup from "./pages/interestJobsOptions.jsx"
 import Jobs from "./pages/Jobs.jsx"
 import Browse from "./pages/Browse.jsx"
 import Profile from "./pages/Profile.jsx"
+import JobDescription from "./pages/jobDescription.jsx"
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/browse" element={<Browse />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/jobDescription" element={<JobDescription />} />
       </Routes>
       {/* <Button>Click me</Button>  */}
       {/* <SignUp /> */}

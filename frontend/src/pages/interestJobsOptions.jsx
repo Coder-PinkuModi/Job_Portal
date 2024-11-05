@@ -288,4 +288,4 @@ return (
 );
 };
 
-export default JobInterestSetup;
+export default JobInterestSetup

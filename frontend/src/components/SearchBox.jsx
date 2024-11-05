@@ -13,7 +13,6 @@ function SearchBox() {
 
   const handleSubmitSearch = (keyword) => {
     if (!keyword.trim()) return;
-    console.log(keyword)
     navigate(`/browse/?search=${keyword}`)
     setSearchKeyword('')
   }

@@ -4,7 +4,7 @@ const jobSlice = createSlice({
     
   name: "jobInterest",
   initialState: {
-    job: ["Web Developer", "App Developer", "Sales Executive", "Accountant"],
+    job: ["Web Developer", "App Developer","DevOps"],
   },
   reducer: {
     setJobInterest: (state, action) => {
