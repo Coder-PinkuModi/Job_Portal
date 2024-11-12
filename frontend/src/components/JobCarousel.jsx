@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import JobCard from "./JobCard"; // Assuming JobCard is a separate component
 import "../components/JobCarousel.css"
 import PrevArrow from "../../src/assets/images/previous.png"

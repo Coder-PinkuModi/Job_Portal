@@ -13,7 +13,6 @@ import JobDescription from "./pages/JobDescription.jsx"
 
 export default function App() {
   return (
-    <div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
@@ -23,11 +22,10 @@ export default function App() {
         <Route path="/browse" element={<Browse />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/jobDescription" element={<JobDescription />} />
-      </Routes>
       {/* <Button>Click me</Button>  */}
       {/* <SignUp /> */}
       {/* <Login /> */}
+      </Routes>
 
-    </div>
   )
 }

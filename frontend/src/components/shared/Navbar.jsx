@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/popover";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { setUserStore } from "../../store/User.AuthSlice.js";
 
@@ -36,6 +38,7 @@ const Navbar = () => {
 
                         if (response.status === 200) {
                             const userData = response.data;
+                            // console.log(response.data);
                             console.log("User profile fetched successfully:", userData);
                             setUser(userData);
                             dispatch(setUserStore(response.data));
@@ -51,6 +54,15 @@ const Navbar = () => {
 
         fetchUserProfile();
     }, [dispatch, userFromStore]);
+
+    const logout = async () =>{
+        try{
+            document.cookie = "auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path= /;"
+            window.location.reload();
+        } catch( error ){
+            toast.error("Logout failed: " + error.message)
+        }
+    }
 
     return (
         <div className="flex justify-between items-center mx-auto h-16 px-5 sm:px-20 relative">
@@ -85,15 +97,16 @@ const Navbar = () => {
                     <Popover>
                         <PopoverTrigger>
                             <Avatar className="cursor-pointer">
-                                <AvatarImage src="https://github.com/shadcn.png" />
+                                <AvatarImage src={user.profilePic} />
                             </Avatar>
                         </PopoverTrigger>
                         <PopoverContent>
                            <Link to='/profile' className="hover:underline"> {user.name} <br /></Link>
-                            <Button variant="link">Logout</Button>
+                            <Button variant="link" onClick={logout}>Logout</Button>
                         </PopoverContent>
                     </Popover>
                 )}
+                <ToastContainer />
             </div>
 
             {/* Hamburger Menu Icon */}

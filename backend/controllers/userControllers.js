@@ -90,12 +90,15 @@ async function login(req, res) {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
+    // console.log("user ", user);
+
     return res.status(200).json({
       message: `Welcome ${user.fullName}`,
       success: true,
       userId: user._id,
       userName: user.fullName,
-      // userEmail: user.email,
+      userEmail: user.email,
+      userProfilePic: user.profile.profilePhoto,
       role: user.role,
     });
     //   .header(`Authorization Bearer ${token}`)
@@ -137,7 +140,8 @@ async function userProfile(req, res) {
       success: true,
       userId: user._id,
       userName: user.fullName,
-      // userEmail: user.email,
+      userEmail: user.email,
+      userProfilePic: user.profile.profilePhoto,
       role: user.role,
     });
   } catch (error) {

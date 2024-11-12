@@ -58,7 +58,7 @@ const Login = () => {
                 withCredentials: true,
             });
 
-            console.log("Login successful:", response);
+            // console.log("Login successful:", response.data);
             toast.success(`${response.data.message}`);
 
             dispatch(setUserStore(response.data));

@@ -6,7 +6,7 @@ const UserAuthSlice = createSlice({
         id: null,
         name: null,
         email: null,
-        // profilePic: "",
+        profilePic: "",
         role: null,
     },
 
@@ -15,7 +15,7 @@ const UserAuthSlice = createSlice({
             state.id = action.payload.userId
             state.name = action.payload.userName
             state.email = action.payload.email
-            // state.profilePic = action.payload.profilePic
+            state.profilePic = action.payload.userProfilePic
             state.role = action.payload.role
         }
     }
