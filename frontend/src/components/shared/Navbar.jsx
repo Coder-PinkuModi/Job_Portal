@@ -13,6 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { setUserStore } from "../../store/User.AuthSlice.js";
+import defaultProfileImage from "../../assets/images/blank-profile.jpg";
 
 const Navbar = () => {
     const [user, setUser] = useState(null);
@@ -97,7 +98,7 @@ const Navbar = () => {
                     <Popover>
                         <PopoverTrigger>
                             <Avatar className="cursor-pointer">
-                                <AvatarImage src={user.profilePic} />
+                                <AvatarImage src={ user.profilePic ?? defaultProfileImage} />
                             </Avatar>
                         </PopoverTrigger>
                         <PopoverContent>

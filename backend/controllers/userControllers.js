@@ -8,8 +8,8 @@ dotenv.config();
 
 async function register(req, res) {
   try {
-    const { fullName, email, phoneNumber, password, role } = req.body;
-    if (!fullName || !email || !phoneNumber || !password || !role) {
+    const { fullName, email, phoneNumber, password, confirmPassword, role } = req.body;
+    if (!fullName || !email || !phoneNumber || !password || !confirmPassword || !role) {
       return res
         .status(400)
         .json({ message: "All fields are required", success: false });
@@ -22,6 +22,12 @@ async function register(req, res) {
       return res
         .status(400)
         .json({ message: "Profile picture is required", success: false });
+    }
+
+    if(password !== confirmPassword) {
+      return res
+        .status(400)
+        .json({ message: "Passwords do not match", success: false });
     }
 
     const user = await userModel.findOne({ email: email });
@@ -90,7 +96,8 @@ async function login(req, res) {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    // console.log("user ", user);
+    console.log("user ", user);
+    console.log("user.profile.profilePhoto", user.profile.profilePhoto);
 
     return res.status(200).json({
       message: `Welcome ${user.fullName}`,

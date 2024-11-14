@@ -6,7 +6,7 @@ const UserAuthSlice = createSlice({
         id: null,
         name: null,
         email: null,
-        profilePic: "",
+        profilePic: null,
         role: null,
     },
 
