@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 import Navbar from "../components/shared/Navbar";
 import Footer from "../components/shared/Footer";
 import JobCarousel from "../components/JobCarousel";
-import profileLogo from "../assets/images/blank-profile.jpg";
+import defaultProfileImage from "../assets/images/blank-profile.jpg";
 import EditIcon from "../assets/images/edit.png";
 import "./profile.css";
 
@@ -33,7 +33,7 @@ const userProfile = {
       cgpa: 9.2,
     },
   ],
-  profileImage: profileLogo,
+  profileImage: defaultProfileImage,
 };
 
 function Profile() {
@@ -67,13 +67,12 @@ function Profile() {
 
   const toggleShowMoreEducation = () => {
     setShowMoreEducation((prev) => !prev);
-    if (showMoreEducation) setEditMode(false); // Reset edit mode when collapsing
+    if (showMoreEducation) setEditMode(false);
   };
 
   const handleEditEducation = () => {
     setEditMode(true);
-    // Implement the logic to edit education details here
-    alert("Edit Education Clicked"); // Placeholder for edit logic
+    alert("Edit Education Clicked"); 
   };
 
   return (
@@ -83,14 +82,14 @@ function Profile() {
       <div className="profile-container">
         <div className="profile-header">
           <img
-            src={userProfile.profileImage}
+            src={(userFromStore.profilePic !== null) ? userFromStore.profilePic : defaultProfileImage}
             alt="profile pic"
             className="profile-image"
-            onClick={handleImageClick} // Open modal on click
+            onClick={handleImageClick} 
           />
           <div className="profile-info">
             <h3>
-              {userProfile.name} 
+              {userFromStore.name}
               <abbr title="Click to Edit Profile" onClick={toggleEditOptions}>
                 <img className="EditIcon" src={EditIcon} alt="EditIcon" />
               </abbr>
@@ -103,12 +102,12 @@ function Profile() {
                 </div>
               )}
             </h3>
-            <p>{userProfile.title}</p>
+            <p>{(userFromStore.title !== null) ? userFromStore.title : ""}</p>
           </div>
         </div>
 
         <div className="bio">
-          <p>{userProfile.bio}</p>
+          <p>{(userFromStore.bio !== null) ? userFromStore.bio : ""}</p>
         </div>
 
         <div className="skills">
