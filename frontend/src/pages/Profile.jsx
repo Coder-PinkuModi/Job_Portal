@@ -82,7 +82,7 @@ function Profile() {
       <div className="profile-container">
         <div className="profile-header">
           <img
-            src={(userFromStore.profilePic !== null) ? userFromStore.profilePic : defaultProfileImage}
+            src={userFromStore.profilePic ? userFromStore.profilePic : defaultProfileImage}
             alt="profile pic"
             className="profile-image"
             onClick={handleImageClick} 

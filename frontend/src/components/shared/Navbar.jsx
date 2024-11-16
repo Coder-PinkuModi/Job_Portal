@@ -98,7 +98,7 @@ const Navbar = () => {
                     <Popover>
                         <PopoverTrigger>
                             <Avatar className="cursor-pointer">
-                                <AvatarImage src={ user.profilePic ?? defaultProfileImage} />
+                                <AvatarImage src={ user.profilePic ? user.profilePic : defaultProfileImage} />
                             </Avatar>
                         </PopoverTrigger>
                         <PopoverContent>
