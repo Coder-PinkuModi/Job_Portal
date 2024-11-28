@@ -107,7 +107,7 @@ function Profile() {
         </div>
 
         <div className="bio">
-          <p>{(userFromStore.bio !== null) ? userFromStore.bio : ""}</p>
+          <p>{userFromStore.bio ? userFromStore.bio : ""}</p>
         </div>
 
         <div className="skills">

@@ -23,7 +23,7 @@ const Navbar = () => {
 
     useEffect(() => {
         const fetchUserProfile = async () => {
-            
+
             const cookies = document.cookie.split(";");
 
             const authTokenCookie = cookies.find((cookie) =>
@@ -56,11 +56,11 @@ const Navbar = () => {
         fetchUserProfile();
     }, [dispatch, userFromStore]);
 
-    const logout = async () =>{
-        try{
+    const logout = async () => {
+        try {
             document.cookie = "auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path= /;"
             window.location.reload();
-        } catch( error ){
+        } catch (error) {
             toast.error("Logout failed: " + error.message)
         }
     }
@@ -72,8 +72,8 @@ const Navbar = () => {
                     Job<span className="text-[#3B82F6]">Portal</span>
                 </h1>
             </div>
-            
-            
+
+
             <div className="hidden sm:flex gap-5 items-center">
                 <ul className="flex gap-8 font-medium items-center text-lg">
                     <li className="cursor-pointer">
@@ -82,7 +82,7 @@ const Navbar = () => {
                     <li className="cursor-pointer">
                         <Link to="/jobs">Jobs</Link>
                     </li>
-                        {/* <li className="cursor-pointer"><Link to="/browse">Browse</Link></li> */}
+                    {/* <li className="cursor-pointer"><Link to="/browse">Browse</Link></li> */}
                 </ul>
 
                 {!user ? (
@@ -98,11 +98,11 @@ const Navbar = () => {
                     <Popover>
                         <PopoverTrigger>
                             <Avatar className="cursor-pointer">
-                                <AvatarImage src={ user.profilePic ? user.profilePic : defaultProfileImage} />
+                                <AvatarImage src={user.profilePic ? user.profilePic : defaultProfileImage} />
                             </Avatar>
                         </PopoverTrigger>
                         <PopoverContent>
-                           <Link to='/profile' className="hover:underline"> {user.name} <br /></Link>
+                            <Link to='/profile' className="hover:underline"> {user.name} <br /></Link>
                             <Button variant="link" onClick={logout}>Logout</Button>
                         </PopoverContent>
                     </Popover>
@@ -145,4 +145,4 @@ const Navbar = () => {
     );
 }
 
-export default Navbar;
+export default Navbar
