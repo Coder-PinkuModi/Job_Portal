@@ -72,7 +72,6 @@ const Login = () => {
             });
 
         } catch (error) {
-            console.log("Login failed:", error);
             toast.error(`${error.response.data.message}`);
         } finally {
             setSubmitting(false);

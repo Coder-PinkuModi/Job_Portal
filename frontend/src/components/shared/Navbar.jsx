@@ -76,19 +76,31 @@ const Navbar = () => {
 
             <div className="hidden sm:flex gap-5 items-center">
                 <ul className="flex gap-8 font-medium items-center text-lg">
-                    <li className="cursor-pointer">
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li className="cursor-pointer">
-                        <Link to="/jobs">Jobs</Link>
-                    </li>
+                    {userFromStore && userFromStore.role === "recruiter" ? (
+                        <>
+                            <li className="cursor-pointer">
+                                <Link to="/admin/companies">Companies</Link>
+                            </li>
+                            <li className="cursor-pointer">
+                                <Link to="/admin/jobs">Jobs</Link>
+                            </li>
+                        </>
+                    ) : <>
+                        <li className="cursor-pointer">
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li className="cursor-pointer">
+                            <Link to="/jobs">Jobs</Link>
+                        </li>
+                    </>
+                    }
                     {/* <li className="cursor-pointer"><Link to="/browse">Browse</Link></li> */}
                 </ul>
 
                 {!user ? (
                     <div className="flex gap-5">
                         <Link to="/login">
-                            <Button variant="outline" >Login</Button>
+                            <Button variant="outline">Login</Button>
                         </Link>
                         <Link to="/signup">
                             <Button className="bg-[#4150d9e3] hover:bg-[#515dc8] border-none">Sign Up</Button>
@@ -102,7 +114,13 @@ const Navbar = () => {
                             </Avatar>
                         </PopoverTrigger>
                         <PopoverContent>
-                            <Link to='/profile' className="hover:underline"> {user.name} <br /></Link>
+                            {user.role === "recruiter" ? (
+                                <>
+                                    <li className="list-none"> {user.name} <br /></li>
+                                </>
+                            ) : (
+                                <><Link to='/profile' className="hover:underline"> {user.name} <br /></Link></>
+                            )}
                             <Button variant="link" onClick={logout}>Logout</Button>
                         </PopoverContent>
                     </Popover>

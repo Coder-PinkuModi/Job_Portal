@@ -10,10 +10,12 @@ import Jobs from "./pages/Jobs.jsx"
 import Browse from "./pages/Browse.jsx"
 import Profile from "./pages/Profile.jsx"
 import JobDescription from "./pages/JobDescription.jsx"
+import Companies from "./components/admin/Companies.jsx"
 
 export default function App() {
   return (
       <Routes>
+        {/* for client */}
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
@@ -25,6 +27,9 @@ export default function App() {
       {/* <Button>Click me</Button>  */}
       {/* <SignUp /> */}
       {/* <Login /> */}
+
+      {/* for admin or recruiter */}
+      <Route path="/admin/companies" element={<Companies />} />
       </Routes>
 
   )
