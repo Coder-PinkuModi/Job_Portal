@@ -19,7 +19,7 @@ function Home() {
       }
     }
     redirection()
-  }, []);
+  });
 
   return (
     <div>

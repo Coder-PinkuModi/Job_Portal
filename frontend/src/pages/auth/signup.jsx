@@ -41,7 +41,7 @@ const SignUp = () => {
     const handleProfileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            setProfileImage(URL.createObjectURL(file)); // Set preview
+            setProfileImage(URL.createObjectURL(file));
             setForm({
                 ...form,
                 profile: file

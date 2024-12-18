@@ -11,6 +11,7 @@ import Browse from "./pages/Browse.jsx"
 import Profile from "./pages/Profile.jsx"
 import JobDescription from "./pages/JobDescription.jsx"
 import Companies from "./components/admin/Companies.jsx"
+import CompanyCreate from "./components/admin/CompanyCreate.jsx"
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
 
       {/* for admin or recruiter */}
       <Route path="/admin/companies" element={<Companies />} />
+      <Route path="/admin/companies/create" element={<CompanyCreate />} />
       </Routes>
 
   )

@@ -2,8 +2,10 @@ import Navbar from "../shared/Navbar"
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import CompaniesTable from "./CompaniesTable";
+import { useNavigate } from "react-router-dom";
 
 function Companies() {
+  const navigate = useNavigate();
   return (
     <div>
       <Navbar />
@@ -14,7 +16,7 @@ function Companies() {
             placeholder="Filter by name"
           />
 
-          <Button>New Company</Button>
+          <Button onClick = {() =>navigate("/admin/companies/create")}>New Company</Button>
         </div>
         <CompaniesTable />
       </div>
