@@ -9,7 +9,7 @@ export const isAuthenticated = async (req, res, next) => {
   try {
     const token = req.cookies?.auth_token;
     if (!token) {
-      console.log("Unauthorized access, token not found")
+      // console.log("Unauthorized access, token not found")
       return res
         .status(401)
         .json({ message: "Unauthorized access, token not found", success: false });
@@ -20,7 +20,7 @@ export const isAuthenticated = async (req, res, next) => {
       console.log("Unauthorized access, decode not done")
       return res
         .status(401)
-        .json({ message: "Unauthorized access, decode not done", success: false });
+        .json({ message: "Unauthorized access, login again", success: false });
     }
 
     const user= await userModel.findOne({ _id: decoded._id });

@@ -6,10 +6,6 @@ const companySchema= new mongoose.Schema({
         required: true,
         unique: true
     },
-    email: {
-        type: String,
-        required: true
-    },
     description: {
         type: String,
         required: true
@@ -17,20 +13,13 @@ const companySchema= new mongoose.Schema({
     website:{
         type: String,
     },
-    phoneNumber: {
-        type: Number,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
     location: {
         type: String,
         required: true
     },
     logo:{
         type: String,
+        required: true
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,   

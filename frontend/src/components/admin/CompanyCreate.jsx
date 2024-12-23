@@ -3,29 +3,27 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { COMPANY_END_POINT } from "../../utils/company.endpoints.js"
-import axios from "axios";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 function CompanyCreate() {
     const navigate = useNavigate();
-    const [company,setCompany] = useState();
+    const [companyName,setCompanyName] = useState();
 
     const registerNewCompany = async () =>{
         try {
-            const response = await axios.post(`${COMPANY_END_POINT}/register`, company,{
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials:true
-                }
-            );
-            console.log(response)
+            if(companyName){
+                navigate(`/admin/companies/setup/${companyName}`)
+            }
+            else{
+                toast.error("Please enter company name")
+            }
+
         } catch (error) {
-            console.log("error console while registering new company by the admin", error)
+            console.log("error console while navigating to domain company setup", error)
         }
     }
-  return (
+return (
     <div>
         <Navbar />
         <div className="max-w-4xl mx-auto">
@@ -40,12 +38,13 @@ function CompanyCreate() {
             <Input
             type="text"
             className="my-2"
-            onChange={(e) => {setCompany(e.target.value)}}
+            onChange={(e) => {setCompanyName(e.target.value)}}
             placeholder="Company Name"
+            required
             />
             <div className="flex items-center gap-2 my-10">
                 <Button variant="outline" onClick = {()=>navigate("/admin/companies")}>Cancel</Button>
-                <Button className="bg-[#4150d9e3] hover:bg-[#515dc8]" onClick ={()=>{(registerNewCompany)}}>Continue</Button>
+                <Button className="bg-[#4150d9e3] hover:bg-[#515dc8]" onClick ={registerNewCompany}>Continue</Button>
             </div>
         </div>
     </div>
