@@ -59,13 +59,10 @@ function CompaniesTable() {
                     error
                 );
             }
-            finally {
-                console.log("Companies final console while getting it in home page for recruiter", companies)
-            }
         };
 
         getCompanies(); // Invoke the function
-    },[]); // Dependency array ensures effect runs only when dependencies change
+    },[]);
 
     return (
         <div>
