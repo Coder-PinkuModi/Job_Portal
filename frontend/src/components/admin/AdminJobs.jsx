@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input"
 import Navbar from "../shared/Navbar"
 import AdminJobsTable from "./AdminJobsTable"
 function AdminJobs() {
-  const navigate = useNavigate
+  const navigate = useNavigate()
   return (
     <div>
         <Navbar />

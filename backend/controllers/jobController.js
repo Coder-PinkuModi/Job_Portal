@@ -6,12 +6,13 @@ export const postJob = async (req, res) => {
       title,
       description,
       jobType,
+      qualification,
       salary,
       location,
       skills,
       position,
       company,
-      experience,
+      experienceLevel,
       companyId,
     } = req.body;
 
@@ -19,12 +20,13 @@ export const postJob = async (req, res) => {
       !title ||
       !description ||
       !jobType ||
+      !qualification ||
       !salary ||
       !location ||
       !skills ||
       !position ||
       !company ||
-      !experience ||
+      !experienceLevel ||
       !companyId
     )
       return res.status(400).json({
@@ -33,18 +35,20 @@ export const postJob = async (req, res) => {
       });
 
     const userId = req.user._id;
-
+    
     const job = await jobModel.create({
       title,
       description,
-      salary: Number(salary),
+      qualification,
+      salary,
       jobType,
       location,
-      skills: skills.split(","),
+      skills: skills.slice(","),
       position,
       company,
-      experienceLevel: experience,
-      company: companyId,
+      experienceLevel,
+      company,
+      companyId: companyId,
       createdBy: userId,
     });
 

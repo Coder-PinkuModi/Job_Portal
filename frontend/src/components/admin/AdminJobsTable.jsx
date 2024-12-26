@@ -87,9 +87,9 @@ function AdminJobsTable() {
                     ) : (
                         jobs.map((job) => (
                             <TableRow key={job._id}>
-                                <TableCell>{job.companyName}</TableCell>
-                                <TableCell>{job.role}</TableCell>
-                                <TableCell>{job.totalPositions}</TableCell>
+                                <TableCell>{job.company}</TableCell>
+                                <TableCell>{job.title}</TableCell>
+                                <TableCell>{job.position}</TableCell>
                                 <TableCell>{job.createdAt.split("T")[0]}</TableCell>
                                 <TableCell className="text-right cursor-pointer">
                                     <Popover>
