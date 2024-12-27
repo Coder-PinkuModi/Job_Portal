@@ -4,7 +4,7 @@ Welcome to the Job Portal project! This is a web application designed for job se
 
 ## Hosted URL
 
-The **frontend** of the project is hosted on [Vercel]([https://vercel.com](https://job-portal-product.vercel.app/)). However, the **backend server** is not yet merged and hosted. To experience full functionality, you will need to run the backend locally.
+The **frontend** of the project is hosted on [Vercel](https://job-portal-product.vercel.app/). However, the **backend server** is not yet merged and hosted. To experience full functionality, you will need to run the backend locally.
 
 ## Local Setup Instructions
 
