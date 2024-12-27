@@ -56,8 +56,6 @@ function AdminJobsTable() {
                 }
             } catch (error) {
                 console.log("Error while getting jobs in JobsTable:", error);
-            } finally {
-                console.log("Jobs final console while getting it in JobsTable", jobs);
             }
         };
 

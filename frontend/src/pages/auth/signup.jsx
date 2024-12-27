@@ -87,8 +87,7 @@ const SignUp = () => {
             });
 
             setRole("");
-            setProfileImage(null);
-
+            setProfileImage("");
         }
     };
 
@@ -122,7 +121,6 @@ const SignUp = () => {
                         >
                             <option value="">Select your role</option>
                             <option value="recruiter">Recruiter</option>
-                            <option value="admin">Admin</option>
                             <option value="user">User</option>
                         </select>
 
@@ -145,11 +143,12 @@ const SignUp = () => {
                             />
                         </div>
 
-                        {profileImage && (
+                        {profileImage && profileImage !== "" && (
                             <div className="relative top-3">
                                 <img src={profileImage} alt="Profile Preview" className="w-24 h-24 rounded-full mt-2 border" />
                             </div>
                         )}
+
 
                         {!submitting ? (
                             <Button type="submit" className="relative top-6 bg-[#4150d9e3] hover:bg-[#515dc8]" onClick={(event) => handleSubmitChange(event)}>Sign Up</Button>

@@ -41,7 +41,8 @@ function CompaniesTable() {
                     if (getCompaniesResponse.status === 200) {
                         console.log(
                             "Companies response while getting it in home page for recruiter",
-                            getCompaniesResponse)
+                            getCompaniesResponse
+                        );
                         dispatch(setCompanies(getCompaniesResponse.data.companies)); // Update Redux store
                         setCompaniess(getCompaniesResponse.data.companies); // Update local state
                     } else {

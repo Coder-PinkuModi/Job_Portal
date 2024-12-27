@@ -127,12 +127,12 @@ const Login = () => {
                                     type="radio"
                                     id="admin"
                                     name="role"
-                                    value="admin"
-                                    checked={role === "admin"}
+                                    value="recruiter"
+                                    checked={role === "recruiter"}
                                     onChange={handleRoleChange}
                                     className="cursor-pointer"
                                 />
-                                <Label htmlFor="admin" className="cursor-pointer">Admin</Label>
+                                <Label htmlFor="admin" className="cursor-pointer">Recruiter</Label>
                             </div>
                         </div>
 
