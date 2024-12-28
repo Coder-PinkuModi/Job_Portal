@@ -1,3 +1,5 @@
+[![wakatime](https://wakatime.com/badge/github/Coder-PinkuModi/PracticeQofCandC--.svg)](https://wakatime.com/badge/github/Coder-PinkuModi/PracticeQofCandC--)
+
 # Job Portal
 
 Welcome to the Job Portal project! This is a web application designed for job seekers and recruiters to connect effectively. The project is built with **ReactJS** for the frontend and **Node.js** for the backend. Right now it's in development process.
@@ -45,9 +47,6 @@ We welcome contributions of all kinds! Here's how you can contribute:
 - Raise an issue if you find a bug or have suggestions for improvement.
 - Submit pull requests to improve the codebase, add features, or restructure components.
 - Feel free to provide feedback or suggestions to enhance the user experience.
-
-### Badges
-[![wakatime](https://wakatime.com/badge/github/Coder-PinkuModi/PracticeQofCandC--.svg)](https://wakatime.com/badge/github/Coder-PinkuModi/PracticeQofCandC--)
 
 ## Feedback
 

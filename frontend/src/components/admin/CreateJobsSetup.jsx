@@ -102,7 +102,7 @@ function CreateJobsSetup() {
   return (
     <div>
       <Navbar />
-      <div className="max-w-4xl mx-auto my-10 p-6 border rounded-md shadow-sm">
+      <div className="max-w-4xl mx-auto my-10 p-6 border rounded-md shadow-md">
         <form onSubmit={handleSubmit}>
           <h1 className="text-2xl font-semibold mb-6 text-center">Create Job</h1>
 
@@ -252,7 +252,7 @@ function CreateJobsSetup() {
             className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
             disabled={submitting}
           >
-            {submitting ? "Submitting..." : "Submit"}
+            {submitting ? "Posting..." : "Post Job"}
           </Button>
         </form>
       </div>

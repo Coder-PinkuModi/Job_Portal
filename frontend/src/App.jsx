@@ -15,6 +15,7 @@ import CompanyCreate from "./components/admin/CompanyCreate.jsx"
 import CompanySetup from "./components/admin/CompanySetup.jsx"
 import AdminJobs from "./components/admin/AdminJobs.jsx"
 import CreateJobsSetup from "./components/admin/CreateJobsSetup.jsx"
+import AdminJobsDescription from "./components/admin/AdminJobsDescription.jsx"
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
       <Route path="/admin/companies/setup/:name" element={<CompanySetup />} />
       <Route path="/admin/jobs" element={<AdminJobs />} />
       <Route path="/admin/create/jobs" element={<CreateJobsSetup />} />
+      <Route path="/admin/jobs/:jobId" element={<AdminJobsDescription />} />
       </Routes>
 
   )

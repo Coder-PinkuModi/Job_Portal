@@ -1,4 +1,6 @@
 import { jobModel } from "../models/jobModel.js";
+import { userModel } from "../models/userModel.js";
+import { companyModel } from "../models/companyModel.js";
 
 export const postJob = async (req, res) => {
   try {
@@ -35,7 +37,7 @@ export const postJob = async (req, res) => {
       });
 
     const userId = req.user._id;
-    
+
     const job = await jobModel.create({
       title,
       description,
@@ -93,6 +95,7 @@ export const getAllJobs = async (req, res) => {
 export const getJobById = async (req, res) => {
   try {
     const jobId = req.params.jobId;
+    const userId = req.user._id;
 
     const job = await jobModel.findById(jobId);
 
@@ -102,16 +105,31 @@ export const getJobById = async (req, res) => {
         success: false,
       });
     }
+    
+    const user = await userModel.findById(userId);
+    if (user?.role === "recruiter" && job?.createdBy !== userId) {
+      const company = await companyModel.findById(job.companyId);
+      
+      return res.status(200).json({
+        message: "Job fetched successfully",
+        job,
+        companyLogo: company?.logo,
+        success: true,
+      });
+    }
 
     return res.status(200).json({
       message: "Job fetched successfully",
       job,
       success: true,
     });
+    
   } catch (error) {
     console.log("Error while getting job by id", error);
   }
 };
+
+export const jobDeletebyAdmin = async (req, res) => {};
 
 export const getAdminJobs = async (req, res) => {
   try {

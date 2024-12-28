@@ -14,11 +14,17 @@ import { MoreHorizontal, Edit2 } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { setJobs } from "../../store/admin.jobs.slice.js";
 import { JOBSENDPOINT } from "../../utils/jobs.enpoints.js"
+import { useNavigate } from "react-router-dom";
 
 function AdminJobsTable() {
     const [jobs, setJobss] = useState([]); // Local state for jobs
     const dispatch = useDispatch(); // Redux dispatch for managing global state
+    const navigate = useNavigate()
     const jobsFromStore = useSelector((state) => state.adminJob.jobs); // Fetching jobs from Redux store
+
+    const handleNavigationToJobPage = (jobId) => {
+        navigate(`/admin/jobs/${jobId}`)
+    }
 
     useEffect(() => {
         const getJobs = async () => {
@@ -86,7 +92,7 @@ function AdminJobsTable() {
                         jobs.map((job) => (
                             <TableRow key={job._id}>
                                 <TableCell>{job.company}</TableCell>
-                                <TableCell>{job.title}</TableCell>
+                                <TableCell><span className="cursor-pointer hover:underline" onClick={()=>handleNavigationToJobPage(job._id)}>{job.title}</span></TableCell>
                                 <TableCell>{job.position}</TableCell>
                                 <TableCell>{job.createdAt.split("T")[0]}</TableCell>
                                 <TableCell className="text-right cursor-pointer">
