@@ -8,6 +8,8 @@ dotenv.config();
 export const isAuthenticated = async (req, res, next) => {
   try {
     const token = req.cookies?.auth_token;
+    // console.log("token",token);
+    
     if (!token) {
       // console.log("Unauthorized access, token not found")
       return res
@@ -26,6 +28,8 @@ export const isAuthenticated = async (req, res, next) => {
     const user= await userModel.findOne({ _id: decoded._id });
 
     req.user= user
+    // console.log("user",user);
+    
 
     next()
   } catch (error) {

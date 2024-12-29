@@ -129,18 +129,19 @@ export const getJobById = async (req, res) => {
 };
 
 export const jobDeletebyAdmin = async (req, res) => {
-  const userId = req.user._id;
-  const jobId = req.params.jobId;
-
   try {
+    const jobId = req.params.jobId;
+    const userId = req.user._id;
+
     const job = await jobModel.findById(jobId);
-    if (job.createdBy !== userId) {
+    // console.log("job",job);
+    if (job.createdBy.toString() !== userId.toString()) {
       return res.status(400).json({
         message: "You are not authorized to delete this job",
         success: false,
       });
     }
-    
+
     // deleting of the job
     await jobModel.findByIdAndDelete(jobId);
     return res.status(204).json({

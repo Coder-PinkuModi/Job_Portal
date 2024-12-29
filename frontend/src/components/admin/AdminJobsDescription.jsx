@@ -20,10 +20,12 @@ function AdminJobsDescription() {
     const handleDeleteJob = async () =>{
         try {
             console.log("jobId",jobId)
-            const response = await axios.get(`${JOBSENDPOINT}/delete/${jobId}`,{
+            console.log(`request url: ${JOBSENDPOINT}/delete/${jobId}`)
+            const response = await axios.delete(`${JOBSENDPOINT}/delete/${jobId}`,{
                     withCredentials: true,
                 },
             )
+            console.log(response)
             if(response.status === 204){
                 console.log("Job Deleted Successfully");
                 navigate(-1);
