@@ -143,7 +143,7 @@ export const jobDeletebyAdmin = async (req, res) => {
     
     // deleting of the job
     await jobModel.findByIdAndDelete(jobId);
-    return res.status(200).json({
+    return res.status(204).json({
       message: "Job deleted successfully",
       success: true,
     });
