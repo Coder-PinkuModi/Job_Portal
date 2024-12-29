@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 // import { useSelector } from "react-redux";
 import Navbar from "../shared/Navbar";
+import { useDispatch } from "react-redux";
+import { setJobs } from "../../store/admin.jobs.slice.js";
 
 function AdminJobsDescription() {
     const { jobId } = useParams();
@@ -12,7 +14,29 @@ function AdminJobsDescription() {
     // const [companyOfJob, setCompanyOfJob] = useState(null);
     const [companyLogo, setCompanyLogo] = useState(null);
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     // const companiesFromStore = useSelector((state) => state.company.companies); 
+
+    const handleDeleteJob = async (jobId) =>{
+        const response = await axios.get(`${JOBSENDPOINT}/getJobById/delete/${jobId}`,
+            {
+                withCredentials: true,
+            }
+        )
+        if(response.status === 200){
+            console.log("Job Deleted Successfully");
+            navigate(-1);
+
+            const jobs = await axios.get(`${JOBSENDPOINT}/getAdminJobs`, {
+                withCredentials: true,
+            });
+
+            if (jobs.status === 200) {
+                console.log("Jobs response while getting it in JobsTable", jobs);
+                dispatch(setJobs(jobs.data.jobs)); // Update Redux store with the fetched jobs
+            }
+        }
+    }
 
     useEffect(() => {
         const fetchJobDetails = async () => {
@@ -102,6 +126,7 @@ function AdminJobsDescription() {
                             <Button
                                 variant="outline"
                                 className="border-2 border-red-600 text-red-600 hover:bg-red-100 font-medium px-6 py-2 rounded-lg"
+                                onClick = {() => handleDeleteJob(jobDetails._id)}
                             >
                                 Delete Job
                             </Button>

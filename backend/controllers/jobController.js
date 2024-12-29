@@ -105,11 +105,11 @@ export const getJobById = async (req, res) => {
         success: false,
       });
     }
-    
+
     const user = await userModel.findById(userId);
     if (user?.role === "recruiter" && job?.createdBy !== userId) {
       const company = await companyModel.findById(job.companyId);
-      
+
       return res.status(200).json({
         message: "Job fetched successfully",
         job,
@@ -123,13 +123,34 @@ export const getJobById = async (req, res) => {
       job,
       success: true,
     });
-    
   } catch (error) {
     console.log("Error while getting job by id", error);
   }
 };
 
-export const jobDeletebyAdmin = async (req, res) => {};
+export const jobDeletebyAdmin = async (req, res) => {
+  const userId = req.user._id;
+  const jobId = req.params.jobId;
+
+  try {
+    const job = await jobModel.findById(jobId);
+    if (job.createdBy !== userId) {
+      return res.status(400).json({
+        message: "You are not authorized to delete this job",
+        success: false,
+      });
+    }
+    
+    // deleting of the job
+    await jobModel.findByIdAndDelete(jobId);
+    return res.status(200).json({
+      message: "Job deleted successfully",
+      success: true,
+    });
+  } catch (error) {
+    console.log("error console while deleting the job", error);
+  }
+};
 
 export const getAdminJobs = async (req, res) => {
   try {

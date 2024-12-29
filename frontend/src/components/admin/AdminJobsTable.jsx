@@ -66,7 +66,7 @@ function AdminJobsTable() {
         };
 
         getJobs(); // Invoke the function
-    },[]); // Dependency array ensures effect runs only when dependencies change
+    },[]);
 
     return (
         <div>
