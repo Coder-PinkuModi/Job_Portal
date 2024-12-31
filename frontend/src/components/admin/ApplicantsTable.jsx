@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import { Table, TableCaption, TableHeader, TableHead, TableRow, TableBody, TableCell } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
@@ -10,15 +10,17 @@ import { Button } from "@/components/ui/button"
 import { JOBSENDPOINT } from "../../utils/jobs.enpoints.js"
 
 export default function ApplicationTable() {
+    const { jobId } = useParams()
     const [applications, setApplications] = useState([])
     const navigate = useNavigate()
 
     useEffect(() => {
         const getApplications = async () => {
             try {
-                const response = await axios.get(`${JOBSENDPOINT}/getApplications`, {
+                const response = await axios.get(`${JOBSENDPOINT}/getJobApplications/${jobId}`, {
                     withCredentials: true
                 })
+                console.log(response)
                 setApplications(response.data.applications)
             } catch (error) {
                 console.log(error)

@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"
-import searchImage from "../assets/Search.svg"
+import { useNavigate } from "react-router-dom";
+// import { useSelector, useDispatch } from "react-redux";
+import searchImage from "../assets/Search.svg";
+
 function SearchBox() {
 
   const [searchKeyword, setSearchKeyword] = useState('');
-
   const navigate = useNavigate();
   const handleChangeSeach = (e) => {
     setSearchKeyword(e.target.value);
@@ -13,8 +14,8 @@ function SearchBox() {
 
   const handleSubmitSearch = (keyword) => {
     if (!keyword.trim()) return;
-    navigate(`/browse/?search=${keyword}`)
-    setSearchKeyword('')
+    navigate(`/browse/?search=${keyword}`);
+    setSearchKeyword('');
   }
 
   return (

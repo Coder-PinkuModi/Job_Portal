@@ -26,6 +26,10 @@ function AdminJobsTable() {
         navigate(`/admin/jobs/${jobId}`)
     }
 
+    const handleNavigationToApplicantsPage = (jobId) => {
+        navigate(`/admin/job/applications/${jobId}`)
+    }
+
     useEffect(() => {
         const getJobs = async () => {
             try {
@@ -104,6 +108,9 @@ function AdminJobsTable() {
                                             <div className="flex items-center gap-2 cursor-pointer">
                                                 <Edit2 className="w-4 h-4 mr-2" />
                                                 <span>Edit</span>
+                                            </div>
+                                            <div className="flex items-center gap-2 cursor-pointer">
+                                                <span onClick = {()=>handleNavigationToApplicantsPage(job._id)}>Applicants</span>
                                             </div>
                                         </PopoverContent>
                                     </Popover>

@@ -19,7 +19,7 @@ export const isAuthenticated = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRETFORAUTH);
     if (!decoded) {
-      console.log("Unauthorized access, decode not done")
+      // console.log("Unauthorized access, decode not done")
       return res
         .status(401)
         .json({ message: "Unauthorized access, login again", success: false });

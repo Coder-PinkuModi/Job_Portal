@@ -7,6 +7,7 @@ import axios from "axios";
 import Navbar from "../shared/Navbar";
 import { useDispatch } from "react-redux";
 import { setJobs } from "../../store/admin.jobs.slice.js";
+import { toast } from "react-toastify";
 
 function AdminJobsDescription() {
     const { jobId } = useParams();
@@ -17,32 +18,34 @@ function AdminJobsDescription() {
     const dispatch = useDispatch()
     // const companiesFromStore = useSelector((state) => state.company.companies); 
 
-    const handleDeleteJob = async () =>{
+    const handleDeleteJob = async () => {
         try {
-            console.log("jobId",jobId)
+            console.log("jobId", jobId)
             console.log(`request url: ${JOBSENDPOINT}/delete/${jobId}`)
-            const response = await axios.delete(`${JOBSENDPOINT}/delete/${jobId}`,{
-                    withCredentials: true,
-                },
+            const response = await axios.delete(`${JOBSENDPOINT}/delete/${jobId}`, {
+                withCredentials: true,
+            },
             )
-            console.log(response)
-            if(response.status === 204){
+            if (response.status === 204) {
                 console.log("Job Deleted Successfully");
                 navigate(-1);
-    
+
                 const jobs = await axios.get(`${JOBSENDPOINT}/getAdminJobs`, {
                     withCredentials: true,
                 });
-    
+
                 if (jobs.status === 200) {
                     console.log("Jobs response while getting it in JobsTable", jobs);
                     dispatch(setJobs(jobs.data.jobs)); // Update Redux store with the fetched jobs
+                }
+                if (jobs.status === 401) {
+                    toast.error("You are not authorized to delete this job")
                 }
             }
         } catch (error) {
             console.error("Error while deleting the job", error)
         }
-        
+
     }
 
     useEffect(() => {
@@ -133,7 +136,7 @@ function AdminJobsDescription() {
                             <Button
                                 variant="outline"
                                 className="border-2 border-red-600 text-red-600 hover:bg-red-100 font-medium px-6 py-2 rounded-lg"
-                                onClick = {() => handleDeleteJob()}
+                                onClick={() => handleDeleteJob()}
                             >
                                 Delete Job
                             </Button>

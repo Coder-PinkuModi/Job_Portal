@@ -23,7 +23,7 @@ export const applyJob = async (req, res) => {
         .json({ message: "Already applied for this job", success: false });
     }
 
-    // here we are keeping this controller function as it is- but we can also add, checking of job exists or not... it depends how we handle UI do later will be decided
+    // here we are keeping this controller function as it is- but we can also add, checking of job exists or not... it depends how we handle UI, do later will be decided
 
     const newApplication = new applicantModel({
       applicant: userId,
@@ -72,9 +72,9 @@ export const getJobApplications = async (req, res) => {
   try {
     const jobId = req.params.jobId;
     const applications = await applicantModel
-      .findById({ job: jobId })
+      .find({ job: jobId })
       .populate({
-        path: "applicant",
+        path: "Applicant",
         options: { sort: { createdAt: -1 } },
       });
     if (!job) {

@@ -10,9 +10,9 @@ import {
 
 const router = express.Router();
 
-router.route("/delete/:jobId").delete(isAuthenticated,jobDeletebyAdmin);
 router.route("/postJob").post(isAuthenticated, postJob);
 router.route("/getJobById/:jobId").get(isAuthenticated,getJobById);
+router.route("/delete/:jobId").delete(isAuthenticated,jobDeletebyAdmin);
 router.route("/getAllJobs").get(getAllJobs);
 router.route("/getAdminJobs").get(isAuthenticated, getAdminJobs);
 

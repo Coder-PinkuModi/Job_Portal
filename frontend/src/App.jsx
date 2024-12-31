@@ -16,19 +16,20 @@ import CompanySetup from "./components/admin/CompanySetup.jsx"
 import AdminJobs from "./components/admin/AdminJobs.jsx"
 import CreateJobsSetup from "./components/admin/CreateJobsSetup.jsx"
 import AdminJobsDescription from "./components/admin/AdminJobsDescription.jsx"
+import Applications from "./components/admin/Applications.jsx"
 
 export default function App() {
   return (
-      <Routes>
-        {/* for client */}
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/setInterest" element={<JobInterestSetup />} />
-        <Route path="/jobs" element={<Jobs />} />
-        <Route path="/browse" element={<Browse />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/jobDescription" element={<JobDescription />} />
+    <Routes>
+      {/* for client */}
+      <Route path="/" element={<Home />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/setInterest" element={<JobInterestSetup />} />
+      <Route path="/jobs" element={<Jobs />} />
+      <Route path="/browse" element={<Browse />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/jobDescription" element={<JobDescription />} />
       {/* <Button>Click me</Button>  */}
       {/* <SignUp /> */}
       {/* <Login /> */}
@@ -40,7 +41,8 @@ export default function App() {
       <Route path="/admin/jobs" element={<AdminJobs />} />
       <Route path="/admin/create/jobs" element={<CreateJobsSetup />} />
       <Route path="/admin/jobs/:jobId" element={<AdminJobsDescription />} />
-      </Routes>
+      <Route path="/admin/job/applications/:jobId" element={<Applications />} />
+    </Routes>
 
   )
 }
