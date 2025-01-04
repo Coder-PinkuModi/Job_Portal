@@ -6,7 +6,7 @@ import { JOBSENDPOINT } from "../utils/jobs.enpoints.js"
 
 export async function userJobfetchHomePage(){
     try {
-        const response = await axios.get(`${JOBSENDPOINT}/getIntitalJobs`{
+        const response = await axios.get(`${JOBSENDPOINT}/getIntitalJobs`,{
             withCredentials: true,
         });
         
