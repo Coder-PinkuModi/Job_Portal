@@ -39,7 +39,7 @@ const jobInterestSetup = async (req, res) => {
             });
         }
 
-        const user = req.user; 
+        const user = req.user._id; 
 
         if (!user) {
             return res.status(404).json({

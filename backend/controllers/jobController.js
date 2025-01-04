@@ -1,5 +1,6 @@
 import { jobModel } from "../models/jobModel.js";
 import { userModel } from "../models/userModel.js";
+import { userInterestJobModel } from "../models/userInterestJobModel.js";
 import { companyModel } from "../models/companyModel.js";
 
 export const postJob = async (req, res) => {
@@ -128,28 +129,46 @@ export const getJobById = async (req, res) => {
   }
 };
 
-export const jobDeletebyAdmin = async (req, res) => {
+export const jobsForUserInitial = async (req, res) => {
   try {
-    const jobId = req.params.jobId;
     const userId = req.user._id;
+    const userInterests = await userInterestJobModel.find({ user: userId });
 
-    const job = await jobModel.findById(jobId);
-    // console.log("job",job);
-    if (job.createdBy.toString() !== userId.toString()) {
-      return res.status(401).json({
-        message: "You are not authorized to delete this job",
+    if (!userInterests) {
+      return res.status(400).json({
+        message: "No interests found",
         success: false,
       });
     }
 
-    // deleting of the job
-    await jobModel.findByIdAndDelete(jobId);
-    return res.status(204).json({
-      message: "Job deleted successfully",
+    // Create regex for each interest in the array
+    const regexes = userInterests.jobsInterested.map(
+      (interest) => new RegExp(interest, "i")
+    );
+
+    // Build query to match any of the words
+    const jobsForUser = await jobModel.find({
+      $or: regexes.flatMap((regex) => [
+        { title: regex },
+        { skills: regex },
+        { description: regex },
+      ]),
+    });
+
+    if (!jobsForUser || jobsForUser.length === 0) {
+      return res.status(404).json({
+        message: "No jobs found",
+        success: false,
+      });
+    }
+
+    return res.status(200).json({
+      message: "Jobs fetched successfully",
+      jobsForUser,
       success: true,
     });
   } catch (error) {
-    console.log("error console while deleting the job", error);
+    console.log("Error while getting jobs for user in home page", error);
   }
 };
 
@@ -172,5 +191,30 @@ export const getAdminJobs = async (req, res) => {
     });
   } catch (error) {
     console.log("Error while getting admin jobs", error);
+  }
+};
+
+export const jobDeletebyAdmin = async (req, res) => {
+  try {
+    const jobId = req.params.jobId;
+    const userId = req.user._id;
+
+    const job = await jobModel.findById(jobId);
+    // console.log("job",job);
+    if (job.createdBy.toString() !== userId.toString()) {
+      return res.status(401).json({
+        message: "You are not authorized to delete this job",
+        success: false,
+      });
+    }
+
+    // deleting of the job
+    await jobModel.findByIdAndDelete(jobId);
+    return res.status(204).json({
+      message: "Job deleted successfully",
+      success: true,
+    });
+  } catch (error) {
+    console.log("error console while deleting the job", error);
   }
 };

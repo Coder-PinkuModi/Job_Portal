@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const jobSlice = createSlice({
+const jobInterestSlice = createSlice({
     
   name: "jobInterest",
   initialState: {
@@ -13,5 +13,5 @@ const jobSlice = createSlice({
   },
 });
 
-export const { setJobInterest } = jobSlice.actions
-export default jobSlice.reducer
+export const { setJobInterest } = jobInterestSlice.actions
+export default jobInterestSlice.reducer
