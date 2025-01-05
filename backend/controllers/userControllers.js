@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { userModel } from "../models/userModel.js";
 import { jwtTokenSign } from "../utils/jwtTokenAuth.js";
-import cloudinaryUploader from "../utils/coudinary.js";
+import cloudinaryUploader from "../services/coudinary.js";
 import dotenv from "dotenv";
 dotenv.config();
 

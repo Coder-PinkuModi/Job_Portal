@@ -1,5 +1,5 @@
 import { companyModel } from "../models/companyModel.js";
-import cloudinaryUploader from "../utils/coudinary.js";
+import cloudinaryUploader from "../services/coudinary.js";
 
 export const register = async (req, res) => {
   try {

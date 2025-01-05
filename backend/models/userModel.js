@@ -10,9 +10,17 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  emailVerified: {
+    type: Boolean,
+    default: false,
+  },
   phoneNumber: {
     type: Number,
     required: true,
+  },
+  phoneNumberVerified: {
+    type: Boolean,
+    default: false
   },
   password: {
     type: String,
@@ -31,6 +39,11 @@ const userSchema = new mongoose.Schema({
     company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
     profilePhoto: { type: String },
   },
+  emailOtp: String,
+  phoneOtp: String,
+  emailOtpExpiry: Date,
+  phoneOtpExpiry: Date,
+  lastLogin: Date
 },{timestamps: true});
 
 
